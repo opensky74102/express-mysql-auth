@@ -18,18 +18,50 @@ CREATE TABLE IF NOT EXISTS users (
     updated_at TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP)
 `;
 
+const createTableMapProject = `
+CREATE TABLE IF NOT EXISTS map_projects (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    project_name VARCHAR(50) NOT NULL,
+    pie_arr INT ARRAY[],
+    created_at TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP)`;
+const createTablePieDetail = `
+CREATE TABLE IF NOT EXISTS pie_detail (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    pie_towername VARCHAR(50) NOT NULL,
+    pie_latitude VARCHAR(50) NOT NULL,
+    pie_longitude VARCHAR(50) NOT NULL,
+    pie_rotate VARCHAR(50) NOT NULL,
+    pie_radius VARCHAR(50) NOT NULL,
+    pie_items JSON,
+    created_at TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP)`;
+
 const createNewUser = `
 INSERT INTO users VALUES(null, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
+`;
+const createNewProject = `
+INSERT INTO map_projects VALUES(null, ?, ?, ?, NOW(), NOW())
+`;
+const createNewPie = `
+INSERT INTO pies_detail VALUES(null, ?, ?, ?, ?, ?, ?, NOW(), NOW())
 `;
 
 const findUserByEmail = `
 SELECT * FROM users WHERE email = ?
 `;
+const findUserById = `SELECT * FROM users WHERE id = ?`;
 
 module.exports = {
     createDB,
     dropDB,
     createTableUSers,
+    createTableMapProject,
+    createTablePieDetail,
     createNewUser,
-    findUserByEmail
+    findUserByEmail,
+    findUserById,
+    createNewProject,
+    createNewPie,
 };

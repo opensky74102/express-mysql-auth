@@ -3,14 +3,13 @@ const { hash: hashPassword, compare: comparePassword } = require('../utils/passw
 const { generate: generateToken } = require('../utils/token');
 
 exports.signup = (req, res) => {
-    const { firstname, lastname,company, url, tax_number, email, password } = req.body;
+    const { firstname, lastname, company, url, tax_number, email, password } = req.body;
     const hashedPassword = hashPassword(password.trim());
 
-    const user = new User(firstname.trim(), lastname.trim(),company.trim(), url.trim(),tax_number.trim(), email.trim(), hashedPassword);
+    const user = new User(firstname.trim(), lastname.trim(), company.trim(), url.trim(), tax_number.trim(), email.trim(), hashedPassword);
 
     User.create(user, (err, data) => {
         if (err) {
-            console.log(err)
             res.status(500).send({
                 status: "error",
                 message: err.message
@@ -22,7 +21,13 @@ exports.signup = (req, res) => {
                 status: "success",
                 data: {
                     token,
-                    data
+                    id: data.id,
+                    firstname: data.firstname,
+                    lastname: data.lastname,
+                    company: data.company,
+                    url: data.url,
+                    tax_number: data.tax_number,
+                    email: data.email
                 }
             });
         }
@@ -53,11 +58,12 @@ exports.signin = (req, res) => {
                     status: 'success',
                     data: {
                         token,
+                        id: data.id,
                         firstname: data.firstname,
                         lastname: data.lastname,
-                        company:data.company,
-                        url:data.url,
-                        tax_number:data.tax_number,
+                        company: data.company,
+                        url: data.url,
+                        tax_number: data.tax_number,
                         email: data.email
                     }
                 });

@@ -17,7 +17,6 @@ const requiredCredentials = [
     'DB_NAME',
     'JWT_SECRET_KEY'
 ];
-
 for (const credential of requiredCredentials) {
     if (process.env[credential] === undefined) {
         logger.error(`Missing required crendential: ${credential}`);

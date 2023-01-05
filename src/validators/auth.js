@@ -15,14 +15,12 @@ const signup = (req, res, next) => {
             .required(),
         company: Joi.string()
             .trim()
-            .alphanum()
             .max(50),
         url: Joi.string()
             .trim()
             .max(50),
         tax_number: Joi.string()
             .trim()
-            .alphanum()
             .max(50),
         email: Joi.string()
             .trim()
