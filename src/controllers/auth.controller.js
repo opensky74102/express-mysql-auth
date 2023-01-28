@@ -5,9 +5,8 @@ const { generate: generateToken } = require('../utils/token');
 exports.signup = (req, res) => {
     const { firstname, lastname, company, url, tax_number, email, password } = req.body;
     const hashedPassword = hashPassword(password.trim());
-
-    const user = new User(firstname.trim(), lastname.trim(), company.trim(), url.trim(), tax_number.trim(), email.trim(), hashedPassword);
-
+    const role = 0;
+    const user = new User(firstname.trim(), lastname.trim(), company.trim(), url.trim(), tax_number.trim(), email.trim(), role, hashedPassword);
     User.create(user, (err, data) => {
         if (err) {
             res.status(500).send({
