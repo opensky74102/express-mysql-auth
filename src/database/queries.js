@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS users (
     url VARCHAR(50) NULL,
     tax_number VARCHAR(50) NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
+    role TINYINT UNSIGNED NOT NULL DEFAULT 0,
     password VARCHAR(255) NOT NULL,
     created_at TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     updated_at TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP)
@@ -27,7 +28,7 @@ CREATE TABLE IF NOT EXISTS map_projects (
     created_at TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     updated_at TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP)`;
 const createTablePieDetail = `
-CREATE TABLE IF NOT EXISTS pie_detail (
+CREATE TABLE IF NOT EXISTS pies_detail (
     id INT PRIMARY KEY AUTO_INCREMENT,
     pie_towername VARCHAR(50) NOT NULL,
     pie_latitude VARCHAR(50) NOT NULL,
@@ -39,7 +40,7 @@ CREATE TABLE IF NOT EXISTS pie_detail (
     updated_at TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP)`;
 
 const createNewUser = `
-INSERT INTO users VALUES(null, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
+INSERT INTO users VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
 `;
 const createNewProject = `
 INSERT INTO map_projects VALUES(null, ?, ?, ?, NOW(), NOW())

@@ -7,9 +7,14 @@ exports.save = async (req, res) => {
   var pie_arr = [];
   var len = pies.length;
   var cnt = 0;
+  if (isNaN(user_id) || user_id === null || user_id === '') {
+    res.status(500).send({
+      status: "error",
+      message: "Oops! Please log in again!"
+    });
+  }
 
   pies.forEach(async pie => {
-    console.log(pie.towerName)
     const pieDtail = new PieDetail(pie.towerName || '', pie.latitude, pie.longitude, pie.rotate, pie.radius, JSON.stringify(pie.items));
     PieDetail.create(pieDtail, (err, data) => {
       if (err) {

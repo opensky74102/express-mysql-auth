@@ -1,4 +1,5 @@
 const db = require('../config/db.config');
+const { logger } = require('../utils/logger');
 
 const _db = (query, data, cb) => {
   db.query(query, data, (err, res) => {
